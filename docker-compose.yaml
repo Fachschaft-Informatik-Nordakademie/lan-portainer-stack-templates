@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  minecraft-server:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft-server
+    restart: unless-stopped
+    tty: true
+    stdin_open: true
+    ports:
+      - 25565:25565
+      - 80:8123
+    environment:
+      - EULA=TRUE
+      - TYPE=PURPUR # use PURPUR for optimal performance with plugins
+      - SERVER_NAME="NAK Test Server"
+
+    volumes:
+      - ./data/:/data/
