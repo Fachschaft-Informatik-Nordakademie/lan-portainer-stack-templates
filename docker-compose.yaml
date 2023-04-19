@@ -15,14 +15,16 @@ services:
       - GENERATOR=FLAT
       - DIFFICULTY=peaceful
       - OPS=${OPS}
+      - MAX_PLAYERS=${MAX_PLAYERS}
       - MODE=creative # set to creative to allow for building
       - GENERATE_STRUCTURES=false
       - MOTD=Build the Elmshorn Campus with Worldedit in Creative Mode
-      # Install Worldedit
+      # Install Worldedit and Dynmap
       - MODS=https://dev.bukkit.org/projects/worldedit/files/latest
       # Install LuckPerms to allow for users to use Worldedit
       - SPIGET_RESOURCES=28140
-      # TODO: Add Dynmap to allow for a map of the server
+    volumes:
+      - creative-data:/data/
   survival-server:
     image: itzg/minecraft-server:latest
     tty: true
@@ -35,11 +37,17 @@ services:
       - TYPE=PURPUR # use PURPUR for optimal performance with plugins
       - SERVER_NAME="Survival"
       - OPS=${OPS}
+      - MAX_PLAYERS=${MAX_PLAYERS}
       - MODE=survival # set to creative to allow for building
       - FORCE_GAMEMODE=true
       - GENERATE_STRUCTURES=true
       - MOTD=Survival Server
+      # Install Worldedit to fix issues if necessary
+      - MODS=https://dev.bukkit.org/projects/worldedit/files/latest
+      # Install LuckPerms to allow for admins or mods to use Worldedit
       - SPIGET_RESOURCES=28140
+    volumes:
+      - survival-data:/data/
   
   last-man-standing-server:
     image: itzg/minecraft-server:latest
@@ -53,13 +61,14 @@ services:
       - TYPE=PURPUR # use PURPUR for optimal performance with plugins
       - SERVER_NAME="Last Man Standing"
       - OPS=${OPS}
+      - MAX_PLAYERS=${MAX_PLAYERS}
       - MODE=survival # set to creative to allow for building
       - GENERATE_STRUCTURES=false # To not give Players an unfair Advantage
       - MOTD=Last Man Standing
       - SPIGET_RESOURCES=28140
 
     volumes:
-      - creative-data:/data/
+      - last-man-standing-data:/data/
 
 volumes:
   creative-data:
