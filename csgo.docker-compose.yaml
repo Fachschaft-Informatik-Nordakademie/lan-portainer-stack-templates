@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  csgo:
+    image: cm2network/csgo
+    environment:
+      - SRCDS_TOKEN=${SRCDS_TOKEN}
+      - SRCDS_RCONPW=${SRCDS_RCONPW}
