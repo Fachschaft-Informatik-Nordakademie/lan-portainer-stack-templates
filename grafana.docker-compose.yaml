@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
+    environment:
+      - GF_INSTALL_PLUGINS=marcusolsson-calendar-panel
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.grafana.rule=Host(`grafana.srv-1.nak.lan`)"
+        - "traefik.http.routers.grafana.entrypoints=web,websecure"
+        - "traefik.http.services.grafana.loadbalancer.server.port=3000"

@@ -2,22 +2,24 @@ version: '3'
 
 services:
   traefik:
-    image: traefik:2.10
+    image: traefik
     command:
-      --api.insecure=true
-      --providers.docker=true
-      --providers.docker.swarmMode=true
-      --providers.docker.exposedbydefault=false
-      --entrypoints.web.address=:80
-      --entrypoints.websecure.address=:443
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.swarmMode=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.minecraft.address=:25565
+
     ports:
       - 80:80
       - 443:443
-      - 8080:8080
+      - 25565:25565
     networks:
       - traefik-net
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
       placement:
         constraints:
@@ -25,6 +27,7 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+
 networks:
   traefik-net:
     external: true

@@ -1,74 +1,78 @@
 version: '3'
 
 services:
-  creative-build-server:
+  creative:
     image: itzg/minecraft-server:latest
     tty: true
     stdin_open: true
-    ports:
-      - 25565:25565
-      - 80:8123
     environment:
       - EULA=TRUE
       - TYPE=PURPUR # use PURPUR for optimal performance with plugins
       - SERVER_NAME="Creative with Worldedit"
-      - GENERATOR=FLAT
+      - LEVEL_TYPE=minecraft:flat
       - DIFFICULTY=peaceful
       - OPS=${OPS}
       - MAX_PLAYERS=${MAX_PLAYERS}
+      - MEMORY=8G
       - MODE=creative # set to creative to allow for building
       - GENERATE_STRUCTURES=false
       - MOTD=Build the Elmshorn Campus with Worldedit in Creative Mode
       # Install Worldedit and Dynmap
-      - MODS=https://dev.bukkit.org/projects/worldedit/files/latest
+      - MODS=https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.6.1/FastAsyncWorldEdit-Bukkit-2.6.1.jar
       # Install LuckPerms to allow for users to use Worldedit
       - SPIGET_RESOURCES=28140
     volumes:
       - creative-data:/data/
-  survival-server:
+    ports:
+      - 25565:25565
+  survival:
     image: itzg/minecraft-server:latest
     tty: true
     stdin_open: true
-    ports:
-      - 25566:25565
-      - 81:8123
     environment:
       - EULA=TRUE
       - TYPE=PURPUR # use PURPUR for optimal performance with plugins
       - SERVER_NAME="Survival"
       - OPS=${OPS}
       - MAX_PLAYERS=${MAX_PLAYERS}
+      - MEMORY=8G
       - MODE=survival # set to creative to allow for building
       - FORCE_GAMEMODE=true
       - GENERATE_STRUCTURES=true
       - MOTD=Survival Server
       # Install Worldedit to fix issues if necessary
-      - MODS=https://dev.bukkit.org/projects/worldedit/files/latest
+      - MODS=https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.6.1/FastAsyncWorldEdit-Bukkit-2.6.1.jar
       # Install LuckPerms to allow for admins or mods to use Worldedit
       - SPIGET_RESOURCES=28140
     volumes:
       - survival-data:/data/
+    ports:
+      - 25566:25565
   
-  last-man-standing-server:
+  hungergames:
     image: itzg/minecraft-server:latest
     tty: true
     stdin_open: true
-    ports:
-      - 25567:25565
-      - 82:8123
     environment:
       - EULA=TRUE
       - TYPE=PURPUR # use PURPUR for optimal performance with plugins
       - SERVER_NAME="Last Man Standing"
       - OPS=${OPS}
       - MAX_PLAYERS=${MAX_PLAYERS}
+      - MEMORY=8G
+      # Caching Fire Hunger Games Map
+      # - WORLD=https://download1979.mediafire.com/l4a3a26nvgxgCV8vbrQBi1Ra7kpaL6SW_U16efVDC5g-v1TAUFvf3C9ZCw1Jvd3X0v6whvp3eU4YsazVnYKSGrM0rmhl-Hujk1qn_uczmVfOWv38Ah6dald3gw1EVfGQ7dz2IiCY1kxqv3aAvSkbo5pvnvyo9BTIL9rF_wmKHA/92qpflb0bevqa2k/Catching+Fire+Arena+Official.zip
+      # Station by Berserker Map
+      - WORLD=https://download1648.mediafire.com/reu3ugaj9ctgI7id0B9GCNgo06BJQNuO6RgeAkdAjCBYqlFdswTvRYX_6Z5XhW3pZTyLJPTbM0j_Hj0lDOPdkUwo1CoPx7sc9OGlqhx5HSos-zh5BK3ZD2lIQpQlLi-ctyenYVgV_hDc5CNrci0MCVfxuBuR8QbQdD7ykBQbag/t44du18j60l47fo/Station+by+Berserker+v1.1.zip      
+      - FORCE_WORLD_COPY=true
       - MODE=survival # set to creative to allow for building
       - GENERATE_STRUCTURES=false # To not give Players an unfair Advantage
       - MOTD=Last Man Standing
       - SPIGET_RESOURCES=28140
-
     volumes:
       - last-man-standing-data:/data/
+    ports:
+      - 25567:25565
 
 volumes:
   creative-data:
