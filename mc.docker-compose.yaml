@@ -90,6 +90,7 @@ services:
       - MOTD=Dropper Server
       - WORLD=https://github.com/Fachschaft-Informatik-Nordakademie/lan-portainer-stack-templates/raw/main/minecraft/worlds/the_dropper.zip
       - SPIGET_RESOURCES=28140
+      - ENABLE_COMMAND_BLOCK=true # To allow for teleporting to the next level
     volumes:
       - dropper-data:/data/
     ports:
@@ -107,10 +108,11 @@ services:
       - MAX_PLAYERS=${MAX_PLAYERS}
       - MEMORY=8G
       - MODE=survival # set to creative to allow for building
-      - GENERATE_STRUCTURES=false # To not give Players an unfair Advantage
-      - MOTD=The Dropper 2 Server - This is the sequel to The Dropper
+      - GENERATE_STRUCTURES=false
+      - MOTD=The Dropper 2 Server this is the sequel to The Dropper
       - WORLD=https://github.com/Fachschaft-Informatik-Nordakademie/lan-portainer-stack-templates/raw/main/minecraft/worlds/the_dropper_2.zip
       - SPIGET_RESOURCES=28140
+      - ENABLE_COMMAND_BLOCK=true # To allow for teleporting to the next level
     volumes:
       - dropper-2-data:/data/
     ports:
