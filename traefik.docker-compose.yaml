@@ -21,7 +21,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.dashboard.rule=Host(`traefik.nak.lan`)"
+        - "traefik.http.routers.dashboard.rule=Host(`traefik.services.nak.lan`)"
         - "traefik.http.routers.dashboard.entrypoints=web,websecure"
         - "traefik.http.routers.dashboard.service=api@internal"
         - "traefik.http.services.dashboard.loadbalancer.server.port=888"
