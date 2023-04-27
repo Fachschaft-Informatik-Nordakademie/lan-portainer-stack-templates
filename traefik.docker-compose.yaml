@@ -29,6 +29,4 @@ services:
 
 networks:
   web:
-    name: web
   websecure:
-    name: websecure
