@@ -73,8 +73,54 @@ services:
       - last-man-standing-data:/data/
     ports:
       - 25567:25565
+  
+  dropper:
+    image: itzg/minecraft-server:latest
+    tty: true
+    stdin_open: true
+    environment:
+      - EULA=TRUE
+      - TYPE=PURPUR # use PURPUR for optimal performance with plugins
+      - SERVER_NAME="Dropper"
+      - OPS=${OPS}
+      - MAX_PLAYERS=${MAX_PLAYERS}
+      - MEMORY=8G
+      - MODE=survival # set to creative to allow for building
+      - GENERATE_STRUCTURES=false # To not give Players an unfair Advantage
+      - MOTD=Dropper Server
+      - WORLD=https://github.com/Fachschaft-Informatik-Nordakademie/lan-portainer-stack-templates/raw/main/minecraft/worlds/the_dropper.zip
+      - SPIGET_RESOURCES=28140
+    volumes:
+      - dropper-data:/data/
+    ports:
+      - 25568:25565
+  
+  dropper-2:
+    image: itzg/minecraft-server:latest
+    tty: true
+    stdin_open: true
+    environment:
+      - EULA=TRUE
+      - TYPE=PURPUR # use PURPUR for optimal performance with plugins
+      - SERVER_NAME="Dropper 2"
+      - OPS=${OPS}
+      - MAX_PLAYERS=${MAX_PLAYERS}
+      - MEMORY=8G
+      - MODE=survival # set to creative to allow for building
+      - GENERATE_STRUCTURES=false # To not give Players an unfair Advantage
+      - MOTD=The Dropper 2 Server - This is the sequel to The Dropper
+      - WORLD=https://github.com/Fachschaft-Informatik-Nordakademie/lan-portainer-stack-templates/raw/main/minecraft/worlds/the_dropper_2.zip
+      - SPIGET_RESOURCES=28140
+    volumes:
+      - dropper-2-data:/data/
+    ports:
+      - 25569:25565
+    
+
 
 volumes:
   creative-data:
   survival-data:
   last-man-standing-data:
+  dropper-data:
+  dropper-2-data:
