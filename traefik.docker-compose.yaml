@@ -10,7 +10,7 @@ services:
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
       - --api.dashboard=true
-      - --certificateresolvers.letsencrypt.acme.dnschallenge=true
+      #- --certificateresolvers.letsencrypt.acme.dnschallenge=true
       - --certificateresolvers.letsencrypt.acme.dnschallenge.provider=acme-dns
       - --certificateresolvers.letsencrypt.acme.email=admin@nak-lan.de
       - --certificateresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
