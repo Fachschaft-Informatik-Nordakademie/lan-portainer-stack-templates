@@ -15,7 +15,8 @@ services:
       - 80:80
       - 443:443
     networks:
-      - traefik-net
+      - web
+      - websecure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
@@ -27,5 +28,7 @@ services:
         condition: on-failure
 
 networks:
-  traefik-net:
-    external: true
+  web:
+    name: web
+  websecure:
+    name: websecure
