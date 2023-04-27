@@ -4,13 +4,12 @@ services:
   traefik:
     image: traefik
     command:
-      - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.swarmMode=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-
+      - --api.dashboard=true
     ports:
       - 80:80
       - 443:443
@@ -20,6 +19,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.dashboard.rule=Host(`traefik.nak.lan`)"
+        - "traefik.http.routers.dashboard.entrypoints=web,websecure"
+        - "traefik.http.routers.dashboard.service=api@internal"
       placement:
         constraints:
           - node.role == manager
