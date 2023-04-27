@@ -4,23 +4,27 @@ services:
   traefik:
     image: traefik
     command:
-      - --api.insecure=true
       - --providers.docker=true
       - --providers.docker.swarmMode=true
       - --providers.docker.exposedbydefault=false
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --entrypoints.minecraft.address=:25565
-
+      - --api.dashboard=true
     ports:
       - 80:80
       - 443:443
-      - 25565:25565
     networks:
-      - traefik-net
+      - web
+      - websecure
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.dashboard.rule=Host(`traefik.services.nak.lan`)"
+        - "traefik.http.routers.dashboard.entrypoints=web,websecure"
+        - "traefik.http.routers.dashboard.service=api@internal"
+        - "traefik.http.services.dashboard.loadbalancer.server.port=888"
       placement:
         constraints:
           - node.role == manager
@@ -29,5 +33,5 @@ services:
         condition: on-failure
 
 networks:
-  traefik-net:
-    external: true
+  web:
+  websecure:
