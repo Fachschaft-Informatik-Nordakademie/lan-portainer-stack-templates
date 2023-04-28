@@ -25,6 +25,8 @@ services:
       - creative-data:/data/
     ports:
       - 25565:25565
+      # Dynmap
+      - 8123:8123
   survival:
     image: itzg/minecraft-server:latest
     tty: true
