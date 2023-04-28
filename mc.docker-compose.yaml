@@ -18,7 +18,7 @@ services:
       - GENERATE_STRUCTURES=false
       - MOTD=Build the Elmshorn Campus with Worldedit in Creative Mode
       # Install Worldedit and Dynmap
-      - MODS=https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.6.1/FastAsyncWorldEdit-Bukkit-2.6.1.jar
+      - MODS=https://github.com/IntellectualSites/FastAsyncWorldEdit/releases/download/2.6.1/FastAsyncWorldEdit-Bukkit-2.6.1.jar,https://github.com/Fachschaft-Informatik-Nordakademie/lan-portainer-stack-templates/raw/main/minecraft/plugins/Dynmap-3.5-beta-3-spigot.jar
       # Install LuckPerms to allow for users to use Worldedit
       - SPIGET_RESOURCES=28140
     volumes:
@@ -48,7 +48,7 @@ services:
       - survival-data:/data/
     ports:
       - 25566:25565
-  
+
   hungergames:
     image: itzg/minecraft-server:latest
     tty: true
@@ -63,7 +63,7 @@ services:
       # Caching Fire Hunger Games Map
       # - WORLD=https://download1979.mediafire.com/l4a3a26nvgxgCV8vbrQBi1Ra7kpaL6SW_U16efVDC5g-v1TAUFvf3C9ZCw1Jvd3X0v6whvp3eU4YsazVnYKSGrM0rmhl-Hujk1qn_uczmVfOWv38Ah6dald3gw1EVfGQ7dz2IiCY1kxqv3aAvSkbo5pvnvyo9BTIL9rF_wmKHA/92qpflb0bevqa2k/Catching+Fire+Arena+Official.zip
       # Station by Berserker Map
-      - WORLD=https://download1648.mediafire.com/reu3ugaj9ctgI7id0B9GCNgo06BJQNuO6RgeAkdAjCBYqlFdswTvRYX_6Z5XhW3pZTyLJPTbM0j_Hj0lDOPdkUwo1CoPx7sc9OGlqhx5HSos-zh5BK3ZD2lIQpQlLi-ctyenYVgV_hDc5CNrci0MCVfxuBuR8QbQdD7ykBQbag/t44du18j60l47fo/Station+by+Berserker+v1.1.zip      
+      - WORLD=https://download1648.mediafire.com/reu3ugaj9ctgI7id0B9GCNgo06BJQNuO6RgeAkdAjCBYqlFdswTvRYX_6Z5XhW3pZTyLJPTbM0j_Hj0lDOPdkUwo1CoPx7sc9OGlqhx5HSos-zh5BK3ZD2lIQpQlLi-ctyenYVgV_hDc5CNrci0MCVfxuBuR8QbQdD7ykBQbag/t44du18j60l47fo/Station+by+Berserker+v1.1.zip
       - FORCE_WORLD_COPY=true
       - MODE=survival # set to creative to allow for building
       - GENERATE_STRUCTURES=false # To not give Players an unfair Advantage
@@ -73,7 +73,7 @@ services:
       - last-man-standing-data:/data/
     ports:
       - 25567:25565
-  
+
   dropper:
     image: itzg/minecraft-server:latest
     tty: true
@@ -95,7 +95,7 @@ services:
       - dropper-data:/data/
     ports:
       - 25568:25565
-  
+
   dropper-2:
     image: itzg/minecraft-server:latest
     tty: true
@@ -117,8 +117,6 @@ services:
       - dropper-2-data:/data/
     ports:
       - 25569:25565
-    
-
 
 volumes:
   creative-data:
