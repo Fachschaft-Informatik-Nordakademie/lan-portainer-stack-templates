@@ -11,10 +11,10 @@ services:
       - --entrypoints.websecure.address=:443
       - --api.dashboard=true
       #- --certificateresolvers.letsencrypt.acme.dnschallenge=true
-      - --certificateresolvers.letsencrypt.acme.dnschallenge.provider=acme-dns
-      - --certificateresolvers.letsencrypt.acme.email=admin@nak-lan.de
-      - --certificateresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
-      - --certificateresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+      #- --certificateresolvers.letsencrypt.acme.dnschallenge.provider=acme-dns
+      #- --certificateresolvers.letsencrypt.acme.email=admin@nak-lan.de
+      #- --certificateresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      #- --certificateresolvers.letsencrypt.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
     ports:
       - 80:80
       - 443:443
